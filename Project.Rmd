@@ -7,22 +7,28 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+```{r load_data}
+#loads the tidyverse, a collection of open-source packages developed by Hadley Wickham and his team.
+library(tidyverse)
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+#load readxl and use the `read_excel` function to read the excel file in
+library(readxl)
+GVSU <- read_excel(here::here("GVSU.xlsx"))
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+#load a preview of the dataset
+GVSU
+```
+```{r subsetting}
+#filter the data based on a condition, similar to SAS "WHERE" statement
+GVSU %>% 
+  filter(SEX=="F")
 
-```{r cars}
-summary(cars)
+#keep only certain columns, similar to SAS "KEEP" statement
+GVSU %>% 
+  select(SEX, AGE, YEAR)
+
+#arrange data by a variable, similar to SAS "PROC SORT"
+GVSU %>% 
+  arrange(desc(AGE))
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
