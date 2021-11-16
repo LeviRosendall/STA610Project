@@ -21,7 +21,7 @@ GVSU
 ```{r subsetting}
 #filter the data based on a condition, similar to SAS "WHERE" statement
 GVSU %>% 
-  filter(SEX=="F")
+  filter(SEX=="F" & CREDITS <= 12)
 
 #keep only certain columns, similar to SAS "KEEP" statement
 GVSU %>% 
@@ -30,5 +30,21 @@ GVSU %>%
 #arrange data by a variable, similar to SAS "PROC SORT"
 GVSU %>% 
   arrange(desc(AGE))
+```
+
+```{r}
+GVSU %>%
+  mutate(
+  YEAR = case_when(
+    YEAR == "F" ~ 1,
+    YEAR == "So" ~ 2,
+    YEAR == "J" ~ 3,
+    YEAR == "S" ~ 4,
+    YEAR == "G" ~ 5,
+  )) %>%
+  select(SEX, AGE, YEAR, SLEEP) %>%
+  group_by(YEAR, SEX) %>%
+  summarize(avgSleep= mean(SLEEP, na.rm = T)) %>%
+  arrange(desc(avgSleep))
 ```
 
