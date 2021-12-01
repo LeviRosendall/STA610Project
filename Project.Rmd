@@ -17,6 +17,18 @@ GVSU <- read_excel(here::here("GVSU.xlsx"))
 
 #load a preview of the dataset
 GVSU
+
+#Importing via a API, similar to downloading a SAS Library
+
+library(tidycensus)
+#census_api_key("74dffda41385b000bbc7c51fcc2b32468769dce9", install=TRUE)
+readRenviron("~/.Renviron")
+
+statePop <- get_acs(geography = "state", 
+              variables = c(population = "B01003_001"), 
+              year = 2018)
+
+v17 <- load_variables(2018, "acs5", cache = TRUE)
 ```
 ```{r subsetting}
 #filter the data based on a condition, similar to SAS "WHERE" statement
