@@ -8,6 +8,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r load_data}
+#Importing data into R is very similar to in SAS. There are a number of functions which allow you to import different types of files, such as excel and csv files. Libraries also include datasets, which you can use for analysis in projects for classes, although they are less useful in careers. APIs work very similarly to SAS libraries, allowing you to download data from the internet, which you would most likely join to your current dataset. An example is adding census data to a state dataset to look into median incomes.
+
 #loads the tidyverse, a collection of open-source packages developed by Hadley Wickham and his team.
 library(tidyverse)
 
@@ -31,6 +33,8 @@ statePop <- get_acs(geography = "state",
 v17 <- load_variables(2018, "acs5", cache = TRUE)
 ```
 ```{r subsetting}
+#Subsetting data in R allows you to do more in-depth analysis on certain sections of your data. Types of subsetting include filtering observations based on user defined criteria, selecting certain columns to minimize run times, and sorting the data to easily view extreme observations.
+
 #filter the data based on a condition, similar to SAS "WHERE" statement
 GVSU %>% 
   filter(SEX=="F" & CREDITS <= 12)
@@ -45,6 +49,8 @@ GVSU %>%
 ```
 
 ```{r}
+#Combining all of the above mentioned functions allows for complicated data wrangling. Mutate allows for variables to be changed as they are in a DATA step, as well as calculating new variables based on other ones. A pipe, or %>%, allows for changes to be made in a certain order, to a specific dataset, as they are performed in a SAS DATA step.
+
 GVSU %>%
   mutate(
   YEAR = case_when(
